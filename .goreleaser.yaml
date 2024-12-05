@@ -38,21 +38,21 @@ archives:
       - goos: windows
         format: zip
 
-dockers:
-  - image_templates:
-      - "ghcr.io/l13t/fah_exporter:{{ .Tag }}"
-      - "ghcr.io/l13t/fah_exporter:v{{ .Major }}"
-      - "ghcr.io/l13t/fah_exporter:v{{ .Major }}.{{ .Minor }}"
-      - "ghcr.io/l13t/fah_exporter:latest"
-    use: buildx
-    build_flag_templates:
-      - "--pull"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-      - "--platform=linux/amd64"
-      - "--platform=linux/arm64"
+# dockers:
+#   - image_templates:
+#       - "ghcr.io/l13t/fah_exporter:{{ .Tag }}"
+#       - "ghcr.io/l13t/fah_exporter:v{{ .Major }}"
+#       - "ghcr.io/l13t/fah_exporter:v{{ .Major }}.{{ .Minor }}"
+#       - "ghcr.io/l13t/fah_exporter:latest"
+#     use: buildx
+#     build_flag_templates:
+#       - "--pull"
+#       - "--label=org.opencontainers.image.created={{.Date}}"
+#       - "--label=org.opencontainers.image.title={{.ProjectName}}"
+#       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+#       - "--label=org.opencontainers.image.version={{.Version}}"
+#       - "--platform=linux/amd64"
+#       - "--platform=linux/arm64"
 
 # signs:
 #   - artifacts: checksum

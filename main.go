@@ -14,15 +14,15 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-const namespace = "fah"
+var namespace string
 
-type Configuration struct {
-	teamID   int    `yaml:"team_id"`
-	userName string `yaml:"user_name"`
-	passkey  string `yaml:"passkey"`
-	port     int    `yaml:"port"`
-	apu_url  string `yaml:"api_url"`
-}
+// type Configuration struct {
+// 	teamID   int    `yaml:"team_id"`
+// 	userName string `yaml:"user_name"`
+// 	passkey  string `yaml:"passkey"`
+// 	port     int    `yaml:"port"`
+// 	apu_url  string `yaml:"api_url"`
+// }
 
 // FoldingAtHomeClient represents a client for the Folding@Home API
 type FoldingAtHomeClient struct {
@@ -58,14 +58,6 @@ func (c *FoldingAtHomeClient) FetchTeamUserStats() (*StatsResponse, error) {
 	return &stats, nil
 }
 
-type UsersStats struct {
-	User  string `json:"user"`
-	ID    int    `json:"id"`
-	Rank  int    `json:"rank"`
-	Score int    `json:"score"`
-	Wus   int    `json:"wus"`
-}
-
 type TeamStats struct {
 	TeamID   int    `json:"id"`
 	TeamName string `json:"name"`
@@ -92,6 +84,14 @@ func (c *FoldingAtHomeClient) FetchTeamStats() (*TeamStats, error) {
 		return nil, fmt.Errorf("failed to decode JSON response: %w", err)
 	}
 	return &stats, nil
+}
+
+type UsersStats struct {
+	User  string `json:"user"`
+	ID    int    `json:"id"`
+	Rank  int    `json:"rank"`
+	Score int    `json:"score"`
+	Wus   int    `json:"wus"`
 }
 
 func (c *FoldingAtHomeClient) FetchUsersStats() (*[]UsersStats, error) {
@@ -178,17 +178,17 @@ func (c *FoldingAtHomeClient) FetchUserStats() (*UserStats, error) {
 	return &stats, nil
 }
 
-func (c *FoldingAtHomeClient) Up() bool {
+func (c *FoldingAtHomeClient) Up() int {
 	// reach out to the API to check if it's up
 	resp, err := http.Get(c.BaseURL)
 	if err != nil {
-		return false
+		return 0
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode == http.StatusOK {
-		return true
+		return 1
 	}
-	return false
+	return 0
 }
 
 // Exporter collects Folding@Home stats and exposes them as Prometheus metrics
@@ -210,59 +210,68 @@ type Exporter struct {
 }
 
 // NewExporter creates a new Exporter
-func NewExporter(client *FoldingAtHomeClient) *Exporter {
+func NewExporter(client *FoldingAtHomeClient, namespace string) *Exporter {
 	return &Exporter{
 		client: client,
-		up: prometheus.NewGauge(
-			prometheus.GaugeOpts{
-				Namespace: namespace,
-				Name:      "up",
-				Help:      "FAH Metric Collection Operational",
-			},
-		),
+		up: prometheus.NewGauge(prometheus.GaugeOpts{
+			Namespace: namespace,
+			Name:      "up",
+			Help:      "FAH Metric Collection Operational",
+		}),
 		teamTotalPoints: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_team_score",
-			Help: "Total score of the team.",
+			Namespace: namespace,
+			Name:      "team_score",
+			Help:      "Total score of the team.",
 		}, []string{"team_name", "team_id"}),
 		teamWorkUnits: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_team_work_units",
-			Help: "Total work units completed by the team.",
+			Namespace: namespace,
+			Name:      "team_work_units",
+			Help:      "Total work units completed by the team.",
 		}, []string{"team_name", "team_id"}),
 		teamRank: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_team_rank",
-			Help: "Team rank.",
+			Namespace: namespace,
+			Name:      "team_rank",
+			Help:      "Team rank.",
 		}, []string{"team_name", "team_id"}),
 		usersScore: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_team_users_score",
-			Help: "User score",
+			Namespace: namespace,
+			Name:      "team_users_score",
+			Help:      "User score",
 		}, []string{"user", "team"}),
 		usersRank: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_team_users_rank",
-			Help: "User rank",
+			Namespace: namespace,
+			Name:      "team_users_rank",
+			Help:      "User rank",
 		}, []string{"user", "team"}),
 		usersWus: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_team_users_wus",
-			Help: "User work units",
+			Namespace: namespace,
+			Name:      "team_users_wus",
+			Help:      "User work units",
 		}, []string{"user", "team"}),
 		userScore: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_user_score",
-			Help: "User score",
+			Namespace: namespace,
+			Name:      "user_score",
+			Help:      "User score",
 		}, []string{"user"}),
 		userRank: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_user_rank",
-			Help: "User rank",
+			Namespace: namespace,
+			Name:      "user_rank",
+			Help:      "User rank",
 		}, []string{"user"}),
 		userWus: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_user_wus",
-			Help: "User work units",
+			Namespace: namespace,
+			Name:      "user_wus",
+			Help:      "User work units",
 		}, []string{"user"}),
 		userActive7: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_user_active_7_days",
-			Help: "User active in the last 7 days",
+			Namespace: namespace,
+			Name:      "user_active_7_days",
+			Help:      "User active in the last 7 days",
 		}, []string{"user"}),
 		userActive50: prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: "foldingathome_user_active_50_days",
-			Help: "User active in the last 50 days",
+			Namespace: namespace,
+			Name:      "user_active_50_days",
+			Help:      "User active in the last 50 days",
 		}, []string{"user"}),
 	}
 }
@@ -287,6 +296,9 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 	e.mu.Lock()
 	defer e.mu.Unlock()
+
+	e.up.Set(float64(e.client.Up()))
+	e.up.Collect(ch)
 
 	if e.client.TeamID != -1 {
 		teamStats, err := e.client.FetchTeamStats()
@@ -346,6 +358,7 @@ func main() {
 		fahBaseURL    = flag.String("fah-api-url", "https://api.foldingathome.org", "Base URL for Folding@Home API.")
 		teamID        = flag.Int("team-id", -1, "Team ID to fetch stats for.")
 		userName      = flag.String("user-name", "", "User name to fetch stats for.")
+		ns            = flag.String("namespace", "foldingathome", "Namespace for the Prometheus metrics.")
 	)
 	flag.Parse()
 
@@ -354,7 +367,9 @@ func main() {
 		TeamID:   *teamID,
 		UserName: *userName,
 	}
-	exporter := NewExporter(client)
+	namespace = *ns
+
+	exporter := NewExporter(client, namespace)
 	prometheus.MustRegister(exporter)
 
 	http.Handle("/metrics", promhttp.Handler())

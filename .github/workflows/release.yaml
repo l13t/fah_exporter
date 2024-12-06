@@ -18,6 +18,8 @@ jobs:
   goreleaser:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Qemu
+        uses: docker/setup-qemu-action
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -28,6 +30,15 @@ jobs:
           go-version: stable
       # More assembly might be required: Docker logins, GPG, etc.
       # It all depends on your needs.
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          # You can specify specifying version range for the extra plugins if you prefer.
+          extra_plugins: |
+            @semantic-release/changelog@6.0.0
+            @semantic-release/git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:

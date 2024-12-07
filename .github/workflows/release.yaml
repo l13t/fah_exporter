@@ -2,6 +2,10 @@
 name: goreleaser
 
 on:
+  workflow_run:
+    workflows: ["Release on merge"]
+    types:
+      - completed
   push:
     branches:
       - master

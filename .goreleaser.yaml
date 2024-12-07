@@ -1,18 +1,8 @@
-# This is an example .goreleaser.yml file with some sensible defaults.
-# Make sure to check the documentation at https://goreleaser.com
-
-# The lines below are called `modelines`. See `:help modeline`
-# Feel free to remove those if you don't want/need to use them.
-# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
-# vim: set ts=2 sw=2 tw=0 fo=cnqoj
-
 version: 2
 
 before:
   hooks:
-    # You may remove this if you don't use go modules.
     - go mod tidy
-    # you may remove this if you don't need go generate
     - go generate ./...
 
 builds:
@@ -28,24 +18,23 @@ builds:
 
 archives:
   - format: tar.gz
-    # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
-    # use zip for windows archives
     format_overrides:
       - goos: windows
         format: zip
 
 kos:
-  - repository: ghcr.io/l13t/fah_exportergst
+  - repository: ghcr.io/l13t/fah_exporter
     tags:
-      - "{{.Version}}"
       - "v{{ .Major }}"
       - "v{{ .Major }}.{{ .Minor }}"
+      - "{{ .Tag }}"
+      - "{{if not .Prerelease}}stable{{end}}"
       - latest
     bare: true
     preserve_import_paths: false
@@ -54,33 +43,6 @@ kos:
       - linux/arm64
       - darwin/amd64
       - darwin/arm64
-
-# dockers:
-#   - image_templates:
-#       - "ghcr.io/l13t/fah_exporter:{{ .Tag }}"
-#       - "ghcr.io/l13t/fah_exporter:v{{ .Major }}"
-#       - "ghcr.io/l13t/fah_exporter:v{{ .Major }}.{{ .Minor }}"
-#       - "ghcr.io/l13t/fah_exporter:latest"
-#     use: buildx
-#     build_flag_templates:
-#       - "--pull"
-#       - "--label=org.opencontainers.image.created={{.Date}}"
-#       - "--label=org.opencontainers.image.title={{.ProjectName}}"
-#       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-#       - "--label=org.opencontainers.image.version={{.Version}}"
-#       - "--platform=linux/amd64,linux/arm64"
-
-# signs:
-#   - artifacts: checksum
-#     cmd: gpg2
-#     args:
-#       - "--batch"
-#       - "-u"
-#       - "{{ .Env.GPG_FINGERPRINT }}"
-#       - "--output"
-#       - "${signature}"
-#       - "--detach-sign"
-#       - "${artifact}"
 
 changelog:
   sort: asc

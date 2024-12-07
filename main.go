@@ -16,14 +16,6 @@ import (
 
 var namespace string
 
-// type Configuration struct {
-// 	teamID   int    `yaml:"team_id"`
-// 	userName string `yaml:"user_name"`
-// 	passkey  string `yaml:"passkey"`
-// 	port     int    `yaml:"port"`
-// 	apu_url  string `yaml:"api_url"`
-// }
-
 // FoldingAtHomeClient represents a client for the Folding@Home API
 type FoldingAtHomeClient struct {
 	BaseURL  string
@@ -58,6 +50,7 @@ func (c *FoldingAtHomeClient) FetchTeamUserStats() (*StatsResponse, error) {
 	return &stats, nil
 }
 
+// TeamStats represents the statistics for a team
 type TeamStats struct {
 	TeamID   int    `json:"id"`
 	TeamName string `json:"name"`
@@ -67,6 +60,7 @@ type TeamStats struct {
 	Rank     int    `json:"rank"`
 }
 
+// FetchTeamStats fetches statistics for a team from the Folding@Home API
 func (c *FoldingAtHomeClient) FetchTeamStats() (*TeamStats, error) {
 	url := fmt.Sprintf("%s/team/%d", c.BaseURL, c.TeamID)
 	resp, err := http.Get(url)
@@ -86,6 +80,7 @@ func (c *FoldingAtHomeClient) FetchTeamStats() (*TeamStats, error) {
 	return &stats, nil
 }
 
+// UsersStats represents the statistics for all users in a team
 type UsersStats struct {
 	User  string `json:"user"`
 	ID    int    `json:"id"`
@@ -94,6 +89,7 @@ type UsersStats struct {
 	Wus   int    `json:"wus"`
 }
 
+// FetchUsersStats fetches statistics for all users in a team from the Folding@Home API
 func (c *FoldingAtHomeClient) FetchUsersStats() (*[]UsersStats, error) {
 	url := fmt.Sprintf("%s/team/%d/members", c.BaseURL, c.TeamID)
 	resp, err := http.Get(url)
@@ -150,6 +146,7 @@ func (c *FoldingAtHomeClient) FetchUsersStats() (*[]UsersStats, error) {
 	return &stats, nil
 }
 
+// UserStats represents the statistics for a specific user
 type UserStats struct {
 	Name           string `json:"name"`
 	Score          int    `json:"score"`
@@ -159,6 +156,7 @@ type UserStats struct {
 	Active_50_days int    `json:"active_50_days"`
 }
 
+// FetchUserStats fetches statistics for a specific user from the Folding@Home API
 func (c *FoldingAtHomeClient) FetchUserStats() (*UserStats, error) {
 	url := fmt.Sprintf("%s/user/%s", c.BaseURL, c.UserName)
 	resp, err := http.Get(url)
@@ -178,6 +176,7 @@ func (c *FoldingAtHomeClient) FetchUserStats() (*UserStats, error) {
 	return &stats, nil
 }
 
+// Up checks if the Folding@Home API is up
 func (c *FoldingAtHomeClient) Up() int {
 	// reach out to the API to check if it's up
 	resp, err := http.Get(c.BaseURL)
@@ -300,6 +299,7 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 	e.up.Set(float64(e.client.Up()))
 	e.up.Collect(ch)
 
+	// Fetch team stats if a team ID is provided
 	if e.client.TeamID != -1 {
 		teamStats, err := e.client.FetchTeamStats()
 		if err != nil {
@@ -331,6 +331,7 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 		e.usersRank.Collect(ch)
 	}
 
+	// Fetch user stats if a user name is provided
 	if e.client.UserName != "" {
 		stats, err := e.client.FetchUserStats()
 		if err != nil {
@@ -372,6 +373,15 @@ func main() {
 	exporter := NewExporter(client, namespace)
 	prometheus.MustRegister(exporter)
 
+	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(`<html>
+                <head><title>Folding@Home Exporter</title></head>
+                <body>
+                <h1>Folding@Home Exporter</h1>
+                <p><a href="/metrics">Metrics</a></p>
+                </body>
+                </html>`))
+	}))
 	http.Handle("/metrics", promhttp.Handler())
 	log.Printf("Starting server on %s", *listenAddress)
 	log.Fatal(http.ListenAndServe(*listenAddress, nil))

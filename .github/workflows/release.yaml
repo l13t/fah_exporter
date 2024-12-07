@@ -6,12 +6,12 @@ on:
     workflows: ["Release on merge"]
     types:
       - completed
-  push:
-    branches:
-      - master
-    # run only against tags
-    tags:
-      - 'v\d+.\d+.\d+'
+  # push:
+  #   branches:
+  #     - master
+  #   # run only against tags
+  #   tags:
+  #     - 'v\d+.\d+.\d+'
 
 permissions:
   contents: write

@@ -41,7 +41,7 @@ archives:
         format: zip
 
 kos:
-  - repository: ghcr.io/caarlos0/test-ko
+  - repository: ghcr.io/l13t/fah_exportergst
     tags:
       - "{{.Version}}"
       - "v{{ .Major }}"

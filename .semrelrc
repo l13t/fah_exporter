@@ -1,0 +1,8 @@
+{
+    "changelog-generator": {
+        "name": "default",
+        "options": {
+            "emojis": "true"
+        }
+    }
+}

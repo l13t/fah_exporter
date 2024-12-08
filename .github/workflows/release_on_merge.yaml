@@ -1,20 +1,20 @@
-name: Release on merge
+# name: Release on merge
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
 
-jobs:
-  release-on-merge:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+# jobs:
+#   release-on-merge:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: write
+#     env:
+#       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Release on merge
-        uses: dexwritescode/release-on-merge-action@v1
+#       - name: Release on merge
+#         uses: dexwritescode/release-on-merge-action@v1

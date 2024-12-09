@@ -152,8 +152,8 @@ type UserStats struct {
 	Score          int    `json:"score"`
 	Wus            int    `json:"wus"`
 	Rank           int    `json:"rank"`
-	Active_7_days  int    `json:"active_7_days"`
-	Active_50_days int    `json:"active_50_days"`
+	Active_7_days  int    `json:"active_7"`
+	Active_50_days int    `json:"active_50"`
 }
 
 // FetchUserStats fetches statistics for a specific user from the Folding@Home API

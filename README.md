@@ -49,6 +49,10 @@ Usage of fah_exporter:
 
 **Be aware**: teamID equal `-1` means you don't want to collect information about any team.
 
+## Grafana dashboard
+
+You can import [Grafana dashboard](fah_dashboard.json) into your Grafana instance.
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.

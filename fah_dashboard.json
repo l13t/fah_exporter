@@ -1,0 +1,1029 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 155,
+    "links": [],
+    "panels": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "0": {
+                                    "index": 1,
+                                    "text": "DOWN"
+                                },
+                                "1": {
+                                    "index": 0,
+                                    "text": "UP"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "dark-red",
+                                "value": null
+                            },
+                            {
+                                "color": "dark-green",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": ["lastNotNull"],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.4.0",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "code",
+                    "expr": "foldingathome_up",
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "FAH Status",
+            "type": "stat"
+        },
+        {
+            "collapsed": true,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 5
+            },
+            "id": 2,
+            "panels": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 5,
+                        "w": 3,
+                        "x": 0,
+                        "y": 6
+                    },
+                    "id": 4,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "area",
+                        "justifyMode": "auto",
+                        "orientation": "auto",
+                        "percentChangeColorMode": "standard",
+                        "reduceOptions": {
+                            "calcs": ["lastNotNull"],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "textMode": "auto",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_user_rank",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "User Rank",
+                    "type": "stat"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 5,
+                        "w": 3,
+                        "x": 3,
+                        "y": 6
+                    },
+                    "id": 5,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "area",
+                        "justifyMode": "auto",
+                        "orientation": "auto",
+                        "percentChangeColorMode": "standard",
+                        "reduceOptions": {
+                            "calcs": ["lastNotNull"],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "textMode": "auto",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_user_score",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "User score",
+                    "type": "stat"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 10,
+                        "w": 12,
+                        "x": 0,
+                        "y": 11
+                    },
+                    "id": 7,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_user_active_7_days",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        },
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "editorMode": "code",
+                            "expr": "foldingathome_user_active_50_days",
+                            "hide": false,
+                            "instant": false,
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "B"
+                        }
+                    ],
+                    "title": "User activity",
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 9,
+                        "w": 12,
+                        "x": 0,
+                        "y": 21
+                    },
+                    "id": 6,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_user_wus",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Workiung units",
+                    "type": "timeseries"
+                }
+            ],
+            "title": "FAH User status",
+            "type": "row"
+        },
+        {
+            "collapsed": true,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 6
+            },
+            "id": 11,
+            "panels": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 31
+                    },
+                    "id": 12,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_team_rank",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Team rank",
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 31
+                    },
+                    "id": 13,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_team_score",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Team score",
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 39
+                    },
+                    "id": 14,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_team_work_units",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Team work units",
+                    "type": "timeseries"
+                }
+            ],
+            "title": "FAH Team statistics",
+            "type": "row"
+        },
+        {
+            "collapsed": true,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 7
+            },
+            "id": 3,
+            "panels": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 32
+                    },
+                    "id": 8,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_team_users_rank{user=~\"$team_users\"}",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Group users rank",
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 32
+                    },
+                    "id": 9,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_team_users_score{user=~\"$team_users\"}",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "User score",
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 40
+                    },
+                    "id": 10,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "mode": "single",
+                            "sort": "none"
+                        }
+                    },
+                    "pluginVersion": "11.4.0",
+                    "targets": [
+                        {
+                            "editorMode": "code",
+                            "expr": "foldingathome_team_users_wus{user=~\"$team_users\"}",
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "User work units",
+                    "type": "timeseries"
+                }
+            ],
+            "repeat": "team_users",
+            "title": "FAH Team status for user $team_users",
+            "type": "row"
+        }
+    ],
+    "preload": false,
+    "schemaVersion": 40,
+    "tags": ["fah", "foldingathome"],
+    "templating": {
+        "list": [
+            {
+                "current": {
+                    "text": ["Tobias_VonBrusegard"],
+                    "value": ["Tobias_VonBrusegard"]
+                },
+                "definition": "label_values(foldingathome_team_users_rank,user)",
+                "includeAll": false,
+                "multi": true,
+                "name": "team_users",
+                "options": [],
+                "query": {
+                    "qryType": 1,
+                    "query": "label_values(foldingathome_team_users_rank,user)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "type": "query"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Folding@home exporter dashboard",
+    "uid": "fe6chelnzr4sgb",
+    "version": 3,
+    "weekStart": ""
+}

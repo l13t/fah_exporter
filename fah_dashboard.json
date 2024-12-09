@@ -1,4 +1,41 @@
 {
+    "__inputs": [
+        {
+            "name": "DS_PROMETHEUS",
+            "label": "Prometheus",
+            "description": "",
+            "type": "datasource",
+            "pluginId": "prometheus",
+            "pluginName": "Prometheus"
+        }
+    ],
+    "__elements": {},
+    "__requires": [
+        {
+            "type": "grafana",
+            "id": "grafana",
+            "name": "Grafana",
+            "version": "11.4.0"
+        },
+        {
+            "type": "datasource",
+            "id": "prometheus",
+            "name": "Prometheus",
+            "version": "1.0.0"
+        },
+        {
+            "type": "panel",
+            "id": "stat",
+            "name": "Stat",
+            "version": ""
+        },
+        {
+            "type": "panel",
+            "id": "timeseries",
+            "name": "Time series",
+            "version": ""
+        }
+    ],
     "annotations": {
         "list": [
             {
@@ -18,13 +55,13 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 155,
+    "id": null,
     "links": [],
     "panels": [
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
             },
             "fieldConfig": {
                 "defaults": {
@@ -89,10 +126,10 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
-                    "expr": "foldingathome_up",
+                    "expr": "group by (job) (foldingathome_up{job=\"fah_exporter\"})",
                     "legendFormat": "__auto",
                     "range": true,
                     "refId": "A"
@@ -114,7 +151,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -143,7 +180,7 @@
                     "id": 4,
                     "options": {
                         "colorMode": "value",
-                        "graphMode": "area",
+                        "graphMode": "none",
                         "justifyMode": "auto",
                         "orientation": "auto",
                         "percentChangeColorMode": "standard",
@@ -159,11 +196,19 @@
                     "pluginVersion": "11.4.0",
                     "targets": [
                         {
-                            "editorMode": "code",
-                            "expr": "foldingathome_user_rank",
+                            "disableTextWrap": false,
+                            "editorMode": "builder",
+                            "expr": "max by(user) (foldingathome_user_rank{user=~\".*\"})",
+                            "fullMetaSearch": false,
+                            "includeNullMetadata": true,
                             "legendFormat": "__auto",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "useBackend": false,
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "User Rank",
@@ -172,7 +217,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -201,7 +246,7 @@
                     "id": 5,
                     "options": {
                         "colorMode": "value",
-                        "graphMode": "area",
+                        "graphMode": "none",
                         "justifyMode": "auto",
                         "orientation": "auto",
                         "percentChangeColorMode": "standard",
@@ -217,11 +262,19 @@
                     "pluginVersion": "11.4.0",
                     "targets": [
                         {
-                            "editorMode": "code",
-                            "expr": "foldingathome_user_score",
+                            "disableTextWrap": false,
+                            "editorMode": "builder",
+                            "expr": "max by(user) (foldingathome_user_score{user=~\".*\"})",
+                            "fullMetaSearch": false,
+                            "includeNullMetadata": true,
                             "legendFormat": "__auto",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "useBackend": false,
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "User score",
@@ -230,7 +283,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -287,7 +340,7 @@
                         "h": 10,
                         "w": 12,
                         "x": 0,
-                        "y": 11
+                        "y": 59
                     },
                     "id": 7,
                     "options": {
@@ -305,24 +358,36 @@
                     "pluginVersion": "11.4.0",
                     "targets": [
                         {
-                            "editorMode": "code",
-                            "expr": "foldingathome_user_active_7_days",
-                            "legendFormat": "__auto",
+                            "disableTextWrap": false,
+                            "editorMode": "builder",
+                            "expr": "avg by(user) (foldingathome_user_active_7_days{user=~\".*\"})",
+                            "fullMetaSearch": false,
+                            "includeNullMetadata": true,
+                            "legendFormat": "Active 7 days",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "useBackend": false,
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         },
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "PBFA97CFB590B2093"
+                                "uid": "${DS_PROMETHEUS}"
                             },
-                            "editorMode": "code",
-                            "expr": "foldingathome_user_active_50_days",
+                            "disableTextWrap": false,
+                            "editorMode": "builder",
+                            "expr": "avg by(user) (foldingathome_user_active_50_days{user=~\".*\"})",
+                            "fullMetaSearch": false,
                             "hide": false,
+                            "includeNullMetadata": true,
                             "instant": false,
-                            "legendFormat": "__auto",
+                            "legendFormat": "Active 50 days",
                             "range": true,
-                            "refId": "B"
+                            "refId": "B",
+                            "useBackend": false
                         }
                     ],
                     "title": "User activity",
@@ -331,7 +396,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -388,7 +453,7 @@
                         "h": 9,
                         "w": 12,
                         "x": 0,
-                        "y": 21
+                        "y": 69
                     },
                     "id": 6,
                     "options": {
@@ -407,10 +472,14 @@
                     "targets": [
                         {
                             "editorMode": "code",
-                            "expr": "foldingathome_user_wus",
+                            "expr": "avg by (user) (foldingathome_user_wus{user=~\".*\"})",
                             "legendFormat": "__auto",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "Workiung units",
@@ -433,7 +502,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -494,7 +563,7 @@
                         "h": 8,
                         "w": 12,
                         "x": 0,
-                        "y": 31
+                        "y": 7
                     },
                     "id": 12,
                     "options": {
@@ -513,10 +582,14 @@
                     "targets": [
                         {
                             "editorMode": "code",
-                            "expr": "foldingathome_team_rank",
-                            "legendFormat": "__auto",
+                            "expr": "avg by (team_id) (foldingathome_team_rank{team_id=~\".*\"})",
+                            "legendFormat": "Team ID: {{team_id}}",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "Team rank",
@@ -525,7 +598,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -586,7 +659,7 @@
                         "h": 8,
                         "w": 12,
                         "x": 12,
-                        "y": 31
+                        "y": 7
                     },
                     "id": 13,
                     "options": {
@@ -605,10 +678,14 @@
                     "targets": [
                         {
                             "editorMode": "code",
-                            "expr": "foldingathome_team_score",
-                            "legendFormat": "__auto",
+                            "expr": "avg by (team_id) (foldingathome_team_score{team_id=~\".*\"})",
+                            "legendFormat": "Team ID: {{team_id}}",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "Team score",
@@ -617,7 +694,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -678,7 +755,7 @@
                         "h": 8,
                         "w": 12,
                         "x": 0,
-                        "y": 39
+                        "y": 31
                     },
                     "id": 14,
                     "options": {
@@ -697,10 +774,14 @@
                     "targets": [
                         {
                             "editorMode": "code",
-                            "expr": "foldingathome_team_work_units",
-                            "legendFormat": "__auto",
+                            "expr": "avg by (team_id) (foldingathome_team_work_units{team_id=~\".*\"})",
+                            "legendFormat": "Team ID: {{team_id}}",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "Team work units",
@@ -723,7 +804,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -780,7 +861,7 @@
                         "h": 8,
                         "w": 12,
                         "x": 0,
-                        "y": 32
+                        "y": 8
                     },
                     "id": 8,
                     "options": {
@@ -799,10 +880,14 @@
                     "targets": [
                         {
                             "editorMode": "code",
-                            "expr": "foldingathome_team_users_rank{user=~\"$team_users\"}",
-                            "legendFormat": "__auto",
+                            "expr": "avg by (user) (foldingathome_team_users_rank{user=~\"$team_users\"})",
+                            "legendFormat": "Username: {{user}}",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "Group users rank",
@@ -811,7 +896,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -868,7 +953,7 @@
                         "h": 8,
                         "w": 12,
                         "x": 12,
-                        "y": 32
+                        "y": 8
                     },
                     "id": 9,
                     "options": {
@@ -887,10 +972,14 @@
                     "targets": [
                         {
                             "editorMode": "code",
-                            "expr": "foldingathome_team_users_score{user=~\"$team_users\"}",
-                            "legendFormat": "__auto",
+                            "expr": "avg by (user) (foldingathome_team_users_score{user=~\"$team_users\"})",
+                            "legendFormat": "Username: {{user}}",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "User score",
@@ -899,7 +988,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "${DS_PROMETHEUS}"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -956,7 +1045,7 @@
                         "h": 8,
                         "w": 12,
                         "x": 0,
-                        "y": 40
+                        "y": 16
                     },
                     "id": 10,
                     "options": {
@@ -975,10 +1064,14 @@
                     "targets": [
                         {
                             "editorMode": "code",
-                            "expr": "foldingathome_team_users_wus{user=~\"$team_users\"}",
-                            "legendFormat": "__auto",
+                            "expr": "avg by (user) (foldingathome_team_users_wus{user=~\"$team_users\"})",
+                            "legendFormat": "Username: {{user}}",
                             "range": true,
-                            "refId": "A"
+                            "refId": "A",
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "${DS_PROMETHEUS}"
+                            }
                         }
                     ],
                     "title": "User work units",
@@ -990,16 +1083,12 @@
             "type": "row"
         }
     ],
-    "preload": false,
     "schemaVersion": 40,
     "tags": ["fah", "foldingathome"],
     "templating": {
         "list": [
             {
-                "current": {
-                    "text": ["Tobias_VonBrusegard"],
-                    "value": ["Tobias_VonBrusegard"]
-                },
+                "current": {},
                 "definition": "label_values(foldingathome_team_users_rank,user)",
                 "includeAll": false,
                 "multi": true,
@@ -1024,6 +1113,6 @@
     "timezone": "browser",
     "title": "Folding@home exporter dashboard",
     "uid": "fe6chelnzr4sgb",
-    "version": 3,
+    "version": 4,
     "weekStart": ""
 }

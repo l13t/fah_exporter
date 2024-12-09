@@ -374,13 +374,7 @@ func main() {
 	prometheus.MustRegister(exporter)
 
 	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`<html>
-                <head><title>Folding@Home Exporter</title></head>
-                <body>
-                <h1>Folding@Home Exporter</h1>
-                <p><a href="/metrics">Metrics</a></p>
-                </body>
-                </html>`))
+		w.Write([]byte(`<html><head><title>Folding@Home Exporter</title></head><body><h1>Folding@Home Exporter</h1><p><a href="/metrics">Metrics</a></p></body></html>`)) // nolint:errcheck
 	}))
 	http.Handle("/metrics", promhttp.Handler())
 	log.Printf("Starting server on %s", *listenAddress)

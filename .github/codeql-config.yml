@@ -1,8 +1,0 @@
-queries:
-  - uses: codeql/go-queries
-paths:
-  - src/
-include:
-  - "**/*.go"
-exclude:
-  - "**/tests/**"

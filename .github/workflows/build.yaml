@@ -11,6 +11,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions: read-all
     steps:
       - uses: actions/checkout@v4
 
@@ -18,10 +19,11 @@ jobs:
         with:
           go-version: 1.23
 
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@971e284b6050e8a5849b72094c50ab08da042db8
 
   test:
     runs-on: ubuntu-latest
+    permissions: read-all
     needs: lint
     steps:
       - uses: actions/checkout@v4
@@ -43,7 +45,7 @@ jobs:
         with:
           go-version: 1.23
 
-      - uses: go-semantic-release/action@v1
+      - uses: go-semantic-release/action@48d83ac
         with:
           hooks: goreleaser
         env:

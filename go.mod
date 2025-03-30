@@ -2,7 +2,7 @@ module git.lo0.org.ua/liet/fah-exporter.git
 
 go 1.23.3
 
-require github.com/prometheus/client_golang v1.21.0
+require github.com/prometheus/client_golang v1.21.1
 
 replace git.lo0.org.ua/liet/fah-exporter => ./
 

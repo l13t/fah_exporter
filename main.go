@@ -37,7 +37,7 @@ func (c *FoldingAtHomeClient) FetchTeamUserStats() (*StatsResponse, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch data: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected status code: %d. %s", resp.StatusCode, url)
@@ -67,7 +67,7 @@ func (c *FoldingAtHomeClient) FetchTeamStats() (*TeamStats, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch data: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected status code: %d. %s", resp.StatusCode, url)
@@ -96,7 +96,7 @@ func (c *FoldingAtHomeClient) FetchUsersStats() (*[]UsersStats, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch data: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected status code: %d. %s", resp.StatusCode, url)
@@ -163,7 +163,7 @@ func (c *FoldingAtHomeClient) FetchUserStats() (*UserStats, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch data: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected status code: %d. %s", resp.StatusCode, url)
@@ -183,7 +183,7 @@ func (c *FoldingAtHomeClient) Up() int {
 	if err != nil {
 		return 0
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode == http.StatusOK {
 		return 1
 	}
